@@ -1,0 +1,10 @@
+.hero-wrapper-main{
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+   margin-top: 40px;
+}
+
+.imagesClub{
+   display: flex;
+}

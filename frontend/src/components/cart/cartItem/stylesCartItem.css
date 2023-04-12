@@ -1,0 +1,38 @@
+.main{
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+   
+}
+
+.image-product{
+ width: 100%; 
+}
+
+.image-cover-div{
+   object-fit: contain;
+   height: 60px;
+   width: 60px;
+   padding: 10px;
+}
+
+.wrapper-main{
+   margin: 10px
+}
+
+.countInput{
+   margin: 0px; 
+   padding: 0px;
+   width: 70px;
+}
+
+.cancelBtn{
+  
+   color: darkred;
+   
+}
+
+.image-product{
+   margin: 0px;
+   padding: 0px;
+}
