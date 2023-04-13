@@ -40,12 +40,38 @@ const client = new stytch.Client({
  );
 
 exports.sendOtp = catchAsyncErrors(async (req, res, next) => {
+  
    const {phone_number} = req.body
    const params = {
       phone_number,
     };
+
+
+
      // client.otps.whatsapp.loginOrCreate(params)
     client.otps.sms.loginOrCreate(params)
+   .then((response) => {
+      
+      res.status(200).json({
+         success: true,
+         data: response
+      })
+   })
+   .catch((error) => {
+      res.status(400).json({
+         success: false,
+         data: error
+      })
+   });
+})
+
+exports.sendOtpWhatsapp = catchAsyncErrors(async (req, res, next) => {
+   const {phone_number} = req.body
+
+   const params = {
+      phone_number,
+    };
+   client.otps.whatsapp.loginOrCreate(params)
    .then((response) => {
       res.status(200).json({
          success: true,
@@ -61,24 +87,29 @@ exports.sendOtp = catchAsyncErrors(async (req, res, next) => {
 })
 
 exports.authenticateOtp = catchAsyncErrors(async (req, res, next) => {
-   let code = '';
-   for (let i = 1; i <= 6; i++) {
-     code += req.body[`digit-${i}`];
-   }
-
+   
+   
   
    // params are of type stytch.AuthenticateOTPRequest
+
+   
+   
    const params = {
-     code,
+     code : req.body.code,
      method_id: req.body.phoneId,
    };
  
    client.otps.authenticate(params)
      .then(resp => {
-      console.log('Loggedin', resp)
+      res.status(200).json({
+         success: true,
+         data: resp
+      })
      }).catch(err => {
-       console.log(err)
-      
+      res.status(404).json({
+         success: true,
+         data: err
+      })
      });
 
 
