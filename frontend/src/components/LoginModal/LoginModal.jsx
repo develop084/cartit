@@ -14,16 +14,23 @@ import {
   Switch,
   Text,
   Image,
+  InputLeftAddon,
+  InputGroup,
+  InputLeftElement
+  
 } from "@chakra-ui/react";
 import "./stylesLoginModal.css";
 import { useToast } from "@chakra-ui/react";
+import { PhoneIcon, AddIcon, WarningIcon } from '@chakra-ui/icons'
 import { PinInput, PinInputField, HStack } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 function LoginModal() {
+  const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [number, setNumber] = useState("");
   const [isSwitch, setIsSwitch] = useState(false);
   const [changeAuth, setChangeAuth] = useState("Login");
-  const  [otp, setOtp] = useState("");
+  const [otp, setOtp] = useState("");
   const [phoneId, setPhoneId] = useState("");
   const toast = useToast();
 
@@ -35,7 +42,7 @@ function LoginModal() {
         })
         .then((res) => {
           if (res.status === 200) {
-            setPhoneId(res.data.data.phone_id)
+            setPhoneId(res.data.data.phone_id);
             toast({
               title: `Otp Send To Your Phone Number`,
               position: "top",
@@ -67,7 +74,7 @@ function LoginModal() {
           phone_number: number,
         })
         .then((res) => {
-         setPhoneId(res.data.data.phone_id)
+          setPhoneId(res.data.data.phone_id);
           if (res.status === 200) {
             toast({
               title: `Otp Send To Whatsapp`,
@@ -90,33 +97,53 @@ function LoginModal() {
         });
     } else {
       toast({
-         title: `Please Enter the valid Phone Number`,
-         position: "top",
-         isClosable: true,
-         status: "warning",
-       });
+        title: `Please Enter the valid Phone Number`,
+        position: "top",
+        isClosable: true,
+        status: "warning",
+      });
     }
   };
 
   const verifyOtp = async () => {
-    
+    axios
+      .post("http://localhost:8000/api/v1/authenticateotp", {
+        code: otp,
+        phoneId: phoneId,
+      })
+      .then((res) => {
+        if (res.data.data.status_code == 200) {
+          toast({
+            title: `Otp Verified`,
+            position: "top",
+            isClosable: true,
+            status: "success",
+          });
 
-    axios.post('http://localhost:8000/api/v1/authenticateotp',{
-      code: otp, 
-      phoneId: phoneId
-    }).then(res => console.log(res))
-  }
+          navigate("/home");
+        }
+      })
+      .catch((e) => {
+        toast({
+          title: `Otp entered is not Correct`,
+          position: "top",
+          isClosable: true,
+          status: "warning",
+        });
+      });
+  };
 
   return (
     <div className="wrapper-main-model">
-      <Button colorScheme="green" onClick={onOpen}>
-        Get Started
-      </Button>
-
+      <div>
+        <Button colorScheme="green" onClick={onOpen}>
+          Get Started
+        </Button>
+      </div>
       <Modal isOpen={isOpen} onClose={onClose} size="md">
         <ModalOverlay />
 
-        {changeAuth === "Verify" ?  (
+        {changeAuth === "Verify" ? (
           <ModalContent>
             <ModalHeader>Verify</ModalHeader>
             <ModalCloseButton />
@@ -127,7 +154,7 @@ function LoginModal() {
               <div>
                 <ModalBody>
                   <HStack>
-                    <PinInput onChange={(e)=> setOtp(e)} otp>
+                    <PinInput onChange={(e) => setOtp(e)} otp>
                       <PinInputField />
                       <PinInputField />
                       <PinInputField />
@@ -137,7 +164,18 @@ function LoginModal() {
                     </PinInput>
                   </HStack>
                   <div className="wrapper-btn">
-                  <Button onClick={verifyOtp}>Submit</Button>
+                    <Button onClick={verifyOtp}>Submit</Button>
+                    <p>
+                      Not recieved Yet ?{" "}
+                      <span>
+                        <Button
+                          onClick={isSwitch ? sendOtpWhatsapp : sendOtp}
+                          variant="link"
+                        >
+                          resend
+                        </Button>
+                      </span>
+                    </p>
                   </div>
                 </ModalBody>
               </div>
@@ -156,12 +194,21 @@ function LoginModal() {
               </div>
               <div>
                 <ModalBody>
-                  <Input
+                  <InputGroup>
+                    <InputLeftElement
+                      pointerEvents="none"
+                      children={<PhoneIcon color="gray.300" />}
+                    />
+                   <Input
+                    type="tel"
                     onChange={(e) => setNumber(e.target.value)}
                     variant="filled"
-                    placeholder="Please Enter Your Phone Number"
-                    defaultValue={'+91'}
+                    placeholder="Phone Number"
+                    defaultValue={"+91"}
                   />
+
+                  </InputGroup>
+                  
                   <div className="wrapper-btn">
                     <Switch
                       onChange={(e) =>
@@ -170,7 +217,7 @@ function LoginModal() {
                       colorScheme="green"
                       size="lg"
                     />
-                    <Text>Recieve OTP through Whatsapp </Text>
+                    <Text>Recieve OTP through Whatsapp</Text>
                     <div>
                       <Image
                         draggable="false"

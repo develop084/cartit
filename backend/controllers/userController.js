@@ -66,8 +66,8 @@ exports.sendOtp = catchAsyncErrors(async (req, res, next) => {
 })
 
 exports.sendOtpWhatsapp = catchAsyncErrors(async (req, res, next) => {
-   const {phone_number} = req.body
 
+   
    const params = {
       phone_number,
     };

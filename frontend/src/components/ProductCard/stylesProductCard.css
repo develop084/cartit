@@ -1,0 +1,17 @@
+.card-wrapper{
+   width: 250px;
+   height: 200px;
+}
+
+.image-card{
+   width:100%;
+}
+
+.image-container-card{
+   object-fit: contain;
+}
+
+.price-wrapper{
+   display: flex;
+   justify-content: space-around;
+}

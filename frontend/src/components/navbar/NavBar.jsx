@@ -1,23 +1,32 @@
 import React from 'react'
 import NavbarDrawer from '../navbarDrawer/NavbarDrawer'
-import { Button, Image } from '@chakra-ui/react'
+import { Button, Image, InputGroup, InputLeftElement, Input } from '@chakra-ui/react'
+
+import { SearchIcon, AddIcon, WarningIcon } from '@chakra-ui/icons'
 import './stylesNavbar.css'
 import LoginModal from '../LoginModal/LoginModal'
-function NavBar() {
+import { useNavigate } from 'react-router-dom'
+function NavBar({ loggedIn }) {
  
-   
+const navigate = useNavigate()
   return (
     <div className='nav-wrapper'>
       <div>
       <Image src="https://res.cloudinary.com/dts8hnbex/image/upload/v1681328390/Group_1_1_zquczc_3_-cropped_ikcsit.svg" height={'80px'} />
       </div>
-      <div>
-     <NavbarDrawer />
+      <div >
+      <InputGroup>
+    <InputLeftElement
+      pointerEvents='none'
+      children={<SearchIcon color='gray.300' />}
+    />
+    <Input type='tel' placeholder='Search Items Here ' />
+  </InputGroup>
+     {/* <NavbarDrawer /> */}
+     </div>
      {/* <Button colorScheme='green' margin={"8px"} >Get Started</Button>   */}
 
-
-     <LoginModal/>
-     </div>   
+     { loggedIn ? <Button variant="outline" colorScheme='green' margin={"8px"} onClick={()=> navigate('/')} >Logout</Button> : <LoginModal/>}
     </div>
   )
 }

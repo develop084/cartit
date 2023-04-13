@@ -1,0 +1,22 @@
+.wrapper-main{
+   background-color: darkorange;
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+   padding-top: 60px; 
+   padding-bottom: 60px;
+   margin:0px;
+   
+   
+}
+
+
+@media only screen and (max-width: 600px) {
+   .wrapper-main{
+      flex-direction: column-reverse;
+   }
+   .text-head{
+      font-size: 30px;
+      margin-bottom: 20px
+   }
+}
