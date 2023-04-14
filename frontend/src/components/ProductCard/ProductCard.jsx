@@ -1,28 +1,21 @@
 import React from "react";
-import { Card, CardHeader, CardBody, CardFooter, Button } from "@chakra-ui/react";
+import { Card, CardHeader, CardBody, CardFooter, Button, Text } from "@chakra-ui/react";
 import "./stylesProductCard.css"
 
-function ProductCard() {
+function ProductCard( {image, name, price, rating }) {
   return (
     <div className="card-wrapper">
-      <Card>
+      <Card variant = "elevated">
         <CardBody>
          <div className="image-container-card">
-         <img className="image-card" src="https://res.cloudinary.com/dts8hnbex/image/upload/v1681406947/snack_vqlhid.webp"/>
+          <img className="image-card" src={image}/>
          </div>
-         <p>idsuhfkudshfhishdhsdh</p>
-          <div className="price-wrapper">
-          {/* real price */}
-          <div>
-          <Button variant="outline" color="white" bgColor="yellow.500">$50</Button>
-          </div>
-          {/* fake price */}
-          <div>
-           <p>$80</p>
-          </div>
+         <div>
+         <Text fontSize="xl" marginTop="10px"><b>{name}</b></Text>
+         
+          <span ><Text marginTop="10px" fontWeight="semibold">₹{price}</Text></span>
+         <Button marginTop="20px" color="green">Add to Cart</Button>
          </div>
-
-         <Button color="green">Add to Cart</Button>
         </CardBody>
       </Card>
     </div>

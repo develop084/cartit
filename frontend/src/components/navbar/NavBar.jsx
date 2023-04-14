@@ -15,18 +15,26 @@ const navigate = useNavigate()
       <Image src="https://res.cloudinary.com/dts8hnbex/image/upload/v1681328390/Group_1_1_zquczc_3_-cropped_ikcsit.svg" height={'80px'} />
       </div>
       <div >
-      <InputGroup>
-    <InputLeftElement
-      pointerEvents='none'
-      children={<SearchIcon color='gray.300' />}
-    />
-    <Input type='tel' placeholder='Search Items Here ' />
-  </InputGroup>
-     {/* <NavbarDrawer /> */}
+      
+      {
+        loggedIn ? <InputGroup> <InputLeftElement
+        pointerEvents='none'
+        children={<SearchIcon color='gray.300' />}
+      />  
+      <Input type='tel' placeholder='Search Items Here ' />
+     
+      </InputGroup>
+      : ""
+      }
+   
+   
+   
+   
      </div>
      {/* <Button colorScheme='green' margin={"8px"} >Get Started</Button>   */}
 
-     { loggedIn ? <Button variant="outline" colorScheme='green' margin={"8px"} onClick={()=> navigate('/')} >Logout</Button> : <LoginModal/>}
+     { loggedIn ? <div><NavbarDrawer className="drawer-cart" /><Button variant="outline" colorScheme='green' margin={"8px"} onClick={()=> navigate('/')} >Logout</Button>  
+   </div> : <LoginModal/>}
     </div>
   )
 }

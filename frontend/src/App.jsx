@@ -16,7 +16,7 @@ function App() {
       <NavBar />
       <Hero />
       <SwiperHero />
-      
+      <Counter/>
       {/* <Section/> */}
     </div>
   );

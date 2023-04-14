@@ -13,14 +13,17 @@ import {
  } from '@chakra-ui/react'
 import CartItem from '../cart/cartItem/CartItem'
 import './stylesNavbarDrawer.css'
+import { AiOutlineShoppingCart } from "react-icons/ai";
 function NavbarDrawer() {
    const { isOpen, onOpen, onClose } = useDisclosure()
    const btnRef = React.useRef()
- 
+
   return (
    <>
-   <Button ref={btnRef} colorScheme='green' variant="outline" onClick={onOpen}>
+   <Button variant="outline" color="orange.800">
+   <AiOutlineShoppingCart fontSize="30px"  color="green" ref={btnRef} onClick={onOpen}>
         Cart
+      </AiOutlineShoppingCart>
       </Button>
       <Drawer
       size="md"

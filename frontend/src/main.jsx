@@ -12,6 +12,7 @@ import {
 
 import { ChakraProvider } from '@chakra-ui/react'
 import Home from './pages/Home'
+import Add from './pages/Add';
 
 
 const router = createBrowserRouter([
@@ -26,6 +27,9 @@ const router = createBrowserRouter([
   {
     path: '/home', 
     element:<Home/>
+  },{
+    path: '/add',
+    element: <Add/>
   }
 ]);
 

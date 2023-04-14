@@ -1,7 +1,10 @@
 .skel-wrap{
    display: flex;
-   gap: 16px;
-   justify-content: center;
+   justify-content: space-around;
+   align-items: center;
    flex-wrap: wrap;
-   margin-top: 70px;
+   margin-top: 200px;
+   gap: 12px;
+   
+   
 }
