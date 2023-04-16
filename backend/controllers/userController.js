@@ -114,3 +114,9 @@ exports.authenticateOtp = catchAsyncErrors(async (req, res, next) => {
 
 
 })
+
+
+exports.checkLogic = catchAsyncErrors(async (req, res, next) => {
+   console.log(req.params)
+   
+})

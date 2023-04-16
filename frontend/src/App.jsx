@@ -9,14 +9,23 @@ import Hero from "./components/hero/Hero";
 import { SwiperSlide } from "swiper/react";
 import SwiperHero from "./components/hero/SwiperHero";
 import Section from "./components/hero/Section";
-import Counter from "./components/Counter";
+
+import { useSelector } from "react-redux";
+
+
 function App() {
+
+
+  const clickHandler =()=>{
+    axios.get('http://localhost:8000/api/v1/alpha/:name').then(res => console.log(res))    }
   return (
     <div className="App">
+  
       <NavBar />
       <Hero />
       <SwiperHero />
-      <Counter/>
+   
+      <Button onClick={clickHandler}>Click me</Button>
       {/* <Section/> */}
     </div>
   );

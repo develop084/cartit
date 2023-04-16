@@ -187,10 +187,10 @@ function LoginModal() {
             <ModalCloseButton />
             <div className="modal-body">
               <div className="image-wrapper">
-                <Image
+                {/* <Image
                   src="https://res.cloudinary.com/dts8hnbex/image/upload/v1681361492/6300_b_3_09-PhotoRoom.png-PhotoRoom_i4dzd5.png"
                   width={"100%"}
-                />
+                /> */}
               </div>
               <div>
                 <ModalBody>

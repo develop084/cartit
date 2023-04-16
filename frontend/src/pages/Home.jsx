@@ -4,7 +4,11 @@ import SkeletonItem from '../components/SkeletonItem'
 import './stylesHome.css'
 import ProductCard from '../components/ProductCard/ProductCard'
 import axios from 'axios'
+import { useSelector, useDispatch } from 'react-redux';
+import { addToCart,removeFromCart  } from '../reducers/cart'
+import { Link } from 'react-router-dom'
 function Home() {
+
   const [isLoading ,setIsLoading] = useState(true)
   const [productList , setProductList] = useState([])
   useEffect( () => {
@@ -19,12 +23,18 @@ function Home() {
       .catch (err => console.log(err))
   
   }, [])
+
+  console.log(productList)
+
+
+  
+
   return (
     <div>
       <NavBar loggedIn/>
-
+     <button></button>
       <div className='skel-wrap' >
-        {isLoading ? productList.map(item => <SkeletonItem />) : productList.map(item =>  <ProductCard key={item._id}image={item.image.url} name={item.name} price={item.price} rating={item.price}/>)}
+        {isLoading ? productList.map(item => <SkeletonItem />) : productList.map(item => <Link to={`/item/${item._id}`}><ProductCard id={item._id}image={item.image.url} name={item.name} price={item.price} rating={item.rating}/></Link> )}
       
       </div>
      

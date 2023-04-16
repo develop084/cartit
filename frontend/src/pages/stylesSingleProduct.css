@@ -1,0 +1,12 @@
+.btn-wrapper {
+   display: flex;
+   gap: 10px
+  
+}
+
+.main-wrapper{
+   display: flex;
+   align-items: start;
+   justify-content: space-around;
+   margin-top: 60px
+}

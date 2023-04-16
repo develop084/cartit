@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {
    Drawer,
    DrawerBody,
@@ -14,16 +14,25 @@ import {
 import CartItem from '../cart/cartItem/CartItem'
 import './stylesNavbarDrawer.css'
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { useSelector, useDispatch } from 'react-redux';
+
 function NavbarDrawer() {
    const { isOpen, onOpen, onClose } = useDisclosure()
    const btnRef = React.useRef()
+   const dispatch = useDispatch();
+   const [cartIsEmpty, setCartIsEmpty] = useState(true);
 
+   const cart = useSelector(state => state.cart); 
+  
+   const calculateTotal = cart.reduce((acc, item) => acc + item.price, 0)
+   
   return (
    <>
-   <Button variant="outline" color="orange.800">
-   <AiOutlineShoppingCart fontSize="30px"  color="green" ref={btnRef} onClick={onOpen}>
-        Cart
+   <Button variant="outline" color="green.700" onClick={onOpen}>
+   <AiOutlineShoppingCart fontSize="30px"  color="green" ref={btnRef} >
+      
       </AiOutlineShoppingCart>
+      {cart.length}
       </Button>
       <Drawer
       size="md"
@@ -38,17 +47,26 @@ function NavbarDrawer() {
           <DrawerHeader>Your Cart</DrawerHeader>
 
           <DrawerBody>
-           <CartItem/>
+
+            {
+              cart.length === 0 ? <div className="empty-cart">Your cart is empty</div> :
+              cart.map(item => <CartItem id={item.id} key={item.key} Productimage={item.image} title={item.name} price={item.price}/>)
+            }
+           {/* <CartItem Productimage={} title={} price={}/> */}
           </DrawerBody>
 
           <DrawerFooter>
             <div>
             
-            <Button margin={'20px'}>$ total</Button>
+
+            <Button disabled={ cart.length === 0 ? true: false} margin={'20px'}
+            colorScheme={ cart.length === 0 ? "grey" : "green" }
+            
+            >Total : ₹ {calculateTotal}</Button>
            
             
-            <Button colorScheme='green'>Checkout</Button>
-           
+            <Button disabled={ cart.length === 0 ? true: false} colorScheme={ cart.length === 0 ? "grey" : "green" }>Checkout</Button>
+            
             </div>
           </DrawerFooter>
         </DrawerContent>

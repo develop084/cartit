@@ -20,23 +20,31 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
 } from "@chakra-ui/react";
+
 import { CloseIcon } from "@chakra-ui/icons";
 import "./stylesCartItem.css";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, removeFromCart } from "../../../reducers/cart";
+function CartItem({ id, Productimage, title, price, quantity }) {
 
-function CartItem() {
+const dispatch = useDispatch(); 
+const cart = useSelector((state) => state.cart);
+
+console.log(cart)
+
+const removeFromCartHandler = (id) => { 
+  dispatch(removeFromCart(id));
+}
   return (
-    <Card padding={"10px"}>
+    <Card padding="10px" margin="20px" >
       <div className="main">
         <div className="image-cover-div">
-          <img
-            src="https://d2lnr5mha7bycj.cloudfront.net/product-image/file/large_be23e5f5-c95e-4fbc-8afc-23ab0cd8881a.png"
-            className="image-product"
-          />
+          <img src={Productimage} className="image-product" />
         </div>
         <div>
-          <Text fontSize="sm">Red Seedless Grape</Text>
+          <Text fontSize="sm">{title}</Text>
         </div>
-        <div className="countInput">
+        {/* <div className="countInput">
           <NumberInput>
             <NumberInputField />
             <NumberInputStepper>
@@ -44,15 +52,18 @@ function CartItem() {
               <NumberDecrementStepper />
             </NumberInputStepper>
           </NumberInput>
-        </div>
+        </div> */}
         <div>
           <Text color="green" as="b" fontSize={"bold"}>
-            {" "}
-            $200
+            {" Rs. "}
+            {price}
           </Text>
         </div>
         <div>
-          <button className="cancelBtn">
+          <button
+            className="cancelBtn"
+            onClick={() => removeFromCartHandler({id})}
+          >
             <CloseIcon />
           </button>
         </div>

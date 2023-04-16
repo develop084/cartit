@@ -4,7 +4,7 @@ import App from './App'
 import './index.css'
 import { Provider } from 'react-redux';
 import store from './store';
-import Counter from './components/Counter';
+
 import {
   createBrowserRouter,
   RouterProvider,
@@ -12,7 +12,7 @@ import {
 
 import { ChakraProvider } from '@chakra-ui/react'
 import Home from './pages/Home'
-import Add from './pages/Add';
+import Add from './pages/SingleProduct';
 
 
 const router = createBrowserRouter([
@@ -26,10 +26,10 @@ const router = createBrowserRouter([
   }, 
   {
     path: '/home', 
-    element:<Home/>
+    element:<Provider store={store}><Home/></Provider>
   },{
     path: '/add',
-    element: <Add/>
+    element: <Provider store={store}><Add/></Provider>
   }
 ]);
 
