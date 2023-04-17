@@ -66,13 +66,14 @@ exports.sendOtp = catchAsyncErrors(async (req, res, next) => {
 })
 
 exports.sendOtpWhatsapp = catchAsyncErrors(async (req, res, next) => {
-     
+   
    const {phone_number} = req.body
    const params = {
       phone_number,
     };
    client.otps.whatsapp.loginOrCreate(params)
    .then((response) => {
+      console.log(response)
       res.status(200).json({
          success: true,
          data: response
@@ -101,9 +102,11 @@ exports.authenticateOtp = catchAsyncErrors(async (req, res, next) => {
  
    client.otps.authenticate(params)
      .then(resp => {
+      console.log(resp)
       res.status(200).json({
          success: true,
          data: resp
+
       })
      }).catch(err => {
       res.status(404).json({

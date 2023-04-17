@@ -11,6 +11,7 @@ import SwiperHero from "./components/hero/SwiperHero";
 import Section from "./components/hero/Section";
 
 import { useSelector } from "react-redux";
+import PaymentPage from "./pages/PaymentPage";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
    
       <Button onClick={clickHandler}>Click me</Button>
       {/* <Section/> */}
+      <PaymentPage />
     </div>
   );
 }
