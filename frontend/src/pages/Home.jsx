@@ -34,7 +34,7 @@ function Home() {
       <NavBar loggedIn/>
      <button></button>
       <div className='skel-wrap' >
-        {isLoading ? productList.map(item => <SkeletonItem />) : productList.map(item => <Link to={`/item/${item._id}`}><ProductCard id={item._id}image={item.image.url} name={item.name} price={item.price} rating={item.rating}/></Link> )}
+        {isLoading ? productList.map(item => <SkeletonItem />) : productList.map(item => <ProductCard id={item._id}image={item.image.url} name={item.name} price={item.price} rating={item.rating}/>)}
       
       </div>
      

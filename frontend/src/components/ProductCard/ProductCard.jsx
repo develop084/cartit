@@ -10,6 +10,7 @@ import {
 import "./stylesProductCard.css";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, removeFromCart } from "../../reducers/cart";
+import { Link } from "react-router-dom"; 
 
 function ProductCard({ image, name, price, rating, id }) {
   const dispatch = useDispatch();
@@ -29,14 +30,16 @@ function ProductCard({ image, name, price, rating, id }) {
     <div className="card-wrapper">
       <Card variant="elevated">
         <CardBody>
+          <Link to={`/product/${id}`}>
           <div className="image-container-card">
             <img className="image-card" src={image} />
           </div>
+          </Link>
           <div>
             <Text fontSize="xl" marginTop="10px">
               <b>{name}</b>
             </Text>
-
+  
             <span>
               <Text marginTop="10px" fontWeight="semibold">
                 ₹{price}

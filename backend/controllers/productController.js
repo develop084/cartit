@@ -43,3 +43,9 @@ exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
    const products = await Product.find();
    res.status(200).json(products)
 })
+
+exports.getwithId = catchAsyncErrors(async (req, res, next) => {
+const productID = await Product.findById(req.params.id)
+res.status(200).json(productID)
+
+})

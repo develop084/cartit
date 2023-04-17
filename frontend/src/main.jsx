@@ -28,7 +28,7 @@ const router = createBrowserRouter([
     path: '/home', 
     element:<Provider store={store}><Home/></Provider>
   },{
-    path: '/add',
+    path: '/product/:id',
     element: <Provider store={store}><Add/></Provider>
   }
 ]);
