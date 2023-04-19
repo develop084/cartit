@@ -1,44 +1,60 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
-import { Provider } from 'react-redux';
-import store from './store';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import "./index.css";
+import { Provider } from "react-redux";
+import store from "./store";
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import { ChakraProvider } from '@chakra-ui/react'
-import Home from './pages/Home'
-import Add from './pages/SingleProduct';
-
+import { ChakraProvider } from "@chakra-ui/react";
+import Home from "./pages/Home";
+import Add from "./pages/SingleProduct";
+import Checkout from "./pages/Checkout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Provider store={store}><App/></Provider>,
+    element: (
+      <Provider store={store}>
+        <App />
+      </Provider>
+    ),
   },
   {
-    path: '*',
+    path: "*",
     element: <p>404</p>,
-  }, 
+  },
   {
-    path: '/home', 
-    element:<Provider store={store}><Home/></Provider>
-  },{
-    path: '/product/:id',
-    element: <Provider store={store}><Add/></Provider>
-  }
+    path: "/home",
+    element: (
+      <Provider store={store}>
+        <Home />
+      </Provider>
+    ),
+  },
+  {
+    path: "/product/:id",
+    element: (
+      <Provider store={store}>
+        <Add />
+      </Provider>
+    ),
+  },
+  {
+    path: "/checkout",
+    element: (
+      <Provider store={store}>
+        <Checkout />
+      </Provider>
+    ),
+  },
 ]);
 
-
-
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ChakraProvider>  
-    <RouterProvider router={router} />
+    <ChakraProvider>
+      <RouterProvider router={router} />
     </ChakraProvider>
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);
