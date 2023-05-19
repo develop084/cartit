@@ -26,17 +26,16 @@ import "./stylesCartItem.css";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../../../reducers/cart";
 function CartItem({ id, Productimage, title, price, quantity }) {
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
 
-const dispatch = useDispatch(); 
-const cart = useSelector((state) => state.cart);
+  console.log(cart);
 
-console.log(cart)
-
-const removeFromCartHandler = (id) => { 
-  dispatch(removeFromCart(id));
-}
+  const removeFromCartHandler = (id) => {
+    dispatch(removeFromCart(id));
+  };
   return (
-    <Card padding="10px" margin="20px" >
+    <Card padding="10px" margin="20px">
       <div className="main">
         <div className="image-cover-div">
           <img src={Productimage} className="image-product" />
@@ -44,7 +43,7 @@ const removeFromCartHandler = (id) => {
         <div>
           <Text fontSize="sm">{title}</Text>
         </div>
-        {/* <div className="countInput">
+        <div className="countInput">
           <NumberInput>
             <NumberInputField />
             <NumberInputStepper>
@@ -52,7 +51,7 @@ const removeFromCartHandler = (id) => {
               <NumberDecrementStepper />
             </NumberInputStepper>
           </NumberInput>
-        </div> */}
+        </div>
         <div>
           <Text color="green" as="b" fontSize={"bold"}>
             {" Rs. "}
@@ -62,7 +61,7 @@ const removeFromCartHandler = (id) => {
         <div>
           <button
             className="cancelBtn"
-            onClick={() => removeFromCartHandler({id})}
+            onClick={() => removeFromCartHandler({ id })}
           >
             <CloseIcon />
           </button>
